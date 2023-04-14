@@ -2,9 +2,7 @@
 
 	32 bit recursive version
 
-   n must be < 4294967295, this is because it is
-   compiled using a 32 bit compiler and therefore 
-   has a 32 bit limitation for integers
+   n must be < 18446744073709551614
 
    Cannot use gmp because a recursive function by definition
    must return and C cannot return struct types
@@ -16,7 +14,7 @@
 
 static unsigned int count = 0;
 
-unsigned long long int ack(int m, unsigned int n)
+unsigned long long int ack(int m, unsigned long long int n)
 {
 	count++;
 	if (m == 0){
@@ -32,15 +30,15 @@ unsigned long long int ack(int m, unsigned int n)
 }
 
 int main(int argc, char *argv[]){
-	unsigned long int A;
+	unsigned long long int A;
 
 	if (argc == 3){
 		char *ptrm;
 		char *ptrn;
-		unsigned int m = strtoul(argv[1], &ptrm, 10);
-		unsigned long n = strtoul(argv[2], &ptrn, 10);
+		unsigned long long int m = strtoull(argv[1], &ptrm, 10);
+		unsigned long long int n = strtoull(argv[2], &ptrn, 10);
 		A = ack(m, n);
-		printf("Value: %lu\nCalls: %u\n", A, count);
+		printf("Value: %llu\nCalls: %u\n", A, count);
 		
 	}
 	else{
@@ -50,4 +48,3 @@ int main(int argc, char *argv[]){
 	return 0;	
 }
 
-// This code is contributed by Amiya Rout

@@ -8,22 +8,6 @@
 #include <gmp.h>
 #include <stack.h>
 
-static unsigned int calls = 0;
-
-unsigned int ack(int m, int n){
-	calls++;
-	if (m == 0){
-		return n+1;
-	}
-	else if((m > 0) && (n == 0)){
-		return ack(m-1, 1);
-	}
-	else if((m > 0) && (n > 0)){
-		return ack(m-1, ack(m, n-1));
-	}
-	return 0;
-}
-
 // Non-recursive form of ackermann, uses a stack struct
 unsigned int acknr(int m, mpz_t n){
 	st *s = (st *)malloc(sizeof(st));

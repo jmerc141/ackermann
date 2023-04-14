@@ -12,7 +12,8 @@ memo = {}
 def ackmem(m, n):
 	global count
 	count += 1
-	if (m, n) not in memo:
+
+	if not (m, n) in memo:
 		if m == 0:
 			result = n + 1
 		elif n == 0:
@@ -20,7 +21,7 @@ def ackmem(m, n):
 		else:
 			result = ackmem(m-1, ackmem(m, n-1))
 		memo[(m ,n)] = result
-	return memo[(m, n)]
+	return memo[(m,n)]
 
 if __name__ == '__main__':
 	# if return value is more than recursionlimit
@@ -30,13 +31,11 @@ if __name__ == '__main__':
 
 	# number of digits that n can be
 	inputlimit = 4300
-	sys.set_int_max_str_digits(inputlimit)
+	#sys.set_int_max_str_digits(inputlimit)
 
 	start = time.perf_counter()
-	try:
-		print(ackmem(m,n))
-	except Exception as e:
-		print(e)
+	
+	print('Value:', ackmem(m,n))
 
 	print("Calls:", count)
 	print(time.perf_counter() - start)

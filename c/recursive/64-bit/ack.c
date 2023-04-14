@@ -1,6 +1,7 @@
-/* C program to illustrate Ackermann function
-   only good for values up to 4294967295 and
-   may not return because of recursion depth
+/* 
+	C program to illustrate Ackermann function
+   only good for values up to 18,446,744,073,709,551,615
+   and may not return because of recursion depth
 */
 
 #include <stdio.h>
@@ -8,7 +9,7 @@
 
 static unsigned int count = 0;
 
-unsigned int ack(int m, int n)
+unsigned long long int ack(unsigned long long int m, unsigned long long int n)
 {
 	count++;
 	if (m == 0){
@@ -24,16 +25,17 @@ unsigned int ack(int m, int n)
 }
 
 int main(int argc, char *argv[]){
-	unsigned int A;
+	unsigned long long int A;
 
 	if (argc == 3){
-		int m = atoi(argv[1]);
-		int n = atoi(argv[2]);
+		char *ptrm;
+		char *ptrn;
+
+		unsigned long long int m = strtoull(argv[1], &ptrm, 10);
+		unsigned long long int n = strtoull(argv[2], &ptrn, 10);
 		A = ack(m, n);
-		printf("Value: %u\nCalls: %u\n", A, count);
+		printf("Value: %llu\nCalls: %u\n", A, count);
 		
 	}
 	return 0;	
 }
-
-// This code is contributed by Amiya Rout

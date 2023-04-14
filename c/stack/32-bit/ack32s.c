@@ -67,7 +67,6 @@ void acknr(unsigned long long int m, mpz_t n){
 
 
 int main(int argc, char *argv[]){
-
 	if (argc == 3){
 		mpz_t resm;
 		mpz_init(resm);
