@@ -5,7 +5,7 @@
 
 	This was compiled with a 32 bit compiler
 	but uses the gmp library so n essentially has no limitation
-	m is limited to 32 bit unsigned long int MAX
+	m is limited to 32 bit unsigned long long int MAX
 	but good luck getting past 5
 
 	0 n - n can be any number
