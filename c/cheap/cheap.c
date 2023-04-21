@@ -1,8 +1,12 @@
+/*
+	5 not accurate
 
+	18446744073709551615
+	20,000,000,000
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <gmp.h>
 
 void ackcheap(mpz_t res, long long unsigned int m, mpz_t n){

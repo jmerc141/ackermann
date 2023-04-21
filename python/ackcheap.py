@@ -1,6 +1,19 @@
-#ackcheap
+'''
+	ackcheap
+
+	njit is not helpful, 
+	only works if result is < 18446744073709551615
+	and calc times are not better for those numbers
+	
+'''
+
 import sys
+import time
 from sys import platform
+from hyperop import hyperop
+
+def exp(base, ex, n):
+	return base**ex**n
 
 def ackcheap(m, n):
 	if m == 0:
@@ -12,29 +25,26 @@ def ackcheap(m, n):
 	elif m == 3:
 		return 2**(n + 3) - 3
 	elif m == 4: 
-		return a4(n)
+		return (2**2**2**2**n) - 3
 	elif m == 5:
-		return (2**2**2**2**2**n) - 3
+		if n == 0:
+			return (2**2**2**2**1) - 3
+		if n == 1:
+			# not possible
+			return (2**2**2**2**65536) - 3
 	elif m == 6:
-		return 0
-
-# try njit
-def a3(n):
-	return (2 * n) + 3
-
-def a4(n):
-	return (2**2**2**2**n) - 3
+		H4 = hyperop(4)
+		return H4(2,5)
 
 if __name__ == "__main__":
 	if platform == "win32":
 		# 20,000 digits
-		sys.set_int_max_str_digits(20000)
+		sys.set_int_max_str_digits(56000000)
 
 	m = int(sys.argv[1])
 	n = int(sys.argv[2])
 
-	if platform == "win32":
-		# 20,000 digits
-		sys.set_int_max_str_digits(20000)
+	start = time.perf_counter()
+	print(ackcheap(m, n), '\n')
+	print(time.perf_counter() - start)
 
-	print(ackcheap(m, n))

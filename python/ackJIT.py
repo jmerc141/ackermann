@@ -1,12 +1,17 @@
-# Python program to illustrate Ackermann function
-# recursive JIT version, faster but limited to smaller numbers
-# not sure why
+'''
+	Python program to illustrate Ackermann function
+	recursive JIT version, faster but limited < 9223372036854775806
+	cannot assign types to function because return type is function,
+	not uint64
+
+	try parallel=True
+'''
 
 import sys, time
-from numba import njit
+from numba import njit, types
+from sys import platform
 
-
-@njit
+@njit(fastmath=True)
 def A(m, n):
 	#count += 1
 	if m == 0:
@@ -17,21 +22,24 @@ def A(m, n):
 		return A(m-1, A(m, n-1))
 
 
+if __name__ == "__main__":
+	if platform == "win32":
+		# 20,000 digits
+		#sys.set_int_max_str_digits(20000)
+		pass
 
-# if return value is more than recursionlimit
-# then a maximum recursion depth error will occur
-recursionlimit = 262141
-sys.setrecursionlimit(recursionlimit)
+	# if return value is more than recursionlimit
+	# then a maximum recursion depth error will occur
+	recursionlimit = 262141
+	sys.setrecursionlimit(recursionlimit)
 
-# number of digits that n can be
-inputlimit = 4300
-sys.set_int_max_str_digits(inputlimit)
+	m = int(sys.argv[1])
+	n = int(sys.argv[2])
+	start = time.perf_counter()
+	try:
+		print("Value:", A(m, n))
+		#print(A.inspect_types())
+	except Exception as e:
+		print(e)
+	print(time.perf_counter() - start)
 
-m = int(sys.argv[1])
-n = int(sys.argv[2])
-start = time.perf_counter()
-try:
-	print("Value:", A(m, n))
-except Exception as e:
-	print(e)
-print(time.perf_counter() - start)

@@ -9,6 +9,7 @@ from numba import njit
 
 loops = 0
 
+#@njit(types.uint64(types.uint64), fastmath=True, cache=True)
 @njit
 def acker(m,n):
     right = [m]
