@@ -2,8 +2,7 @@
 
 	recursive version
 
-  	n must be < 18446744073709551614 for 64 bit
-  	4294967294 for 32 bit
+  	n must be < 18446744073709551614
 
 	Cannot use gmp because a recursive function by definition
 	must return and C cannot return struct types
