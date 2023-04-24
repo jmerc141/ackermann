@@ -1,8 +1,6 @@
 /* C program that repcates Ackermann function
 	using a stack struct
 	edit stack.h MAX size for more memory
-
-	apt install libgmp3-dev, libgmp-dev:i386
 	
 */
 
@@ -16,7 +14,6 @@ unsigned int calls = 0;
 void acknr(unsigned long long int m, mpz_t n){
 	st *s = (st *)malloc(sizeof(st));
 	createEmptyStack(s);
-	//printf("item size: %u\n", sizeof(unsigned long long int));
 	push(s,m);
     int i = 0;
 
