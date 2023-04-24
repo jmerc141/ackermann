@@ -11,8 +11,6 @@
 void ackcheap(mpz_t res, long long unsigned int m, mpz_t n){
 	mpz_t two;
 	mpz_init_set_ui(two,2);
-	mpz_t mod;
-	mpz_init_set_ui(mod,2);
 
 	switch(m){
 		case 0:
