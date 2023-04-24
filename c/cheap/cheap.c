@@ -36,14 +36,26 @@ void ackcheap(mpz_t res, long long unsigned int m, mpz_t n){
 			mpz_sub_ui(res, res, 3);
 			break;
 		case 5:
-			mpz_pow_ui(res, two, mpz_get_ui(n));
-			mpz_pow_ui(res, two, mpz_get_ui(res));
-			mpz_pow_ui(res, two, mpz_get_ui(res));
-			mpz_pow_ui(res, two, mpz_get_ui(res));
-			mpz_pow_ui(res, two, mpz_get_ui(res));
-			mpz_sub_ui(res, res, 3);
+			if (mpz_cmp_ui(n, 0) == 0){
+				// A(4, 1)
+				mpz_t one;
+				mpz_init_set_ui(one,1);
+				mpz_pow_ui(res, two, mpz_get_ui(one));
+				mpz_pow_ui(res, two, mpz_get_ui(res));
+				mpz_pow_ui(res, two, mpz_get_ui(res));
+				mpz_pow_ui(res, two, mpz_get_ui(res));
+				mpz_sub_ui(res, res, 3);
+				break;
+			}
+			if (mpz_cmp_ui(n, 1) == 0){
+				// A(4, 65533)
+				printf("2^2^2^2^65533, good luck\n");
+				break;
+			}
 			break;
 	}
+
+	mpz_clear(two);
 }
 
 int main(int argc, char *argv[]){
