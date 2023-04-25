@@ -7,12 +7,13 @@
 	Cannot use gmp because a recursive function by definition
 	must return and C cannot return struct types
 	and may not return because of recursion depth
+	
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-static unsigned int count = 0;
+unsigned int count = 0;
 
 unsigned long long int ack(int m, unsigned long long int n)
 {

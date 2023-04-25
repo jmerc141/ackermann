@@ -1,23 +1,21 @@
 '''
 	Non recursive form of Ackermann function,
 	generally performes better because of recusion depth
-	try to implement numba decorator
+	
+    to run normal stack, comment @njit out
 '''
-import sys
-import time
-from numba import njit
+import sys, time
+from numba import njit, types
 
 loops = 0
 
-#@njit(types.uint64(types.uint64), fastmath=True, cache=True)
-@njit
-def acker(m,n):
+@njit(types.uint64(types.uint64, types.uint64), fastmath=True, cache=True)
+def old_stack(m,n):
     right = [m]
     result = n
     i = 0
 
     while True:
-        #print(right)
         #global loops
         #loops += 1
         if len(right) == 0:
@@ -40,8 +38,10 @@ def acker(m,n):
 
     return result
 
-start = time.perf_counter()
-ack = acker(int(sys.argv[1]), int(sys.argv[2]))
-end = time.perf_counter()
+if __name__ == "__main__":
+    start = time.perf_counter()
+    ack = old_stack(int(sys.argv[1]), int(sys.argv[2]))
+    end = time.perf_counter()
 
-print('%u\n%f seconds' %(ack, (end-start)))
+    print('%u\n%f seconds' %(ack, (end-start)))
+

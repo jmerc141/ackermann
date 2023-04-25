@@ -1,43 +1,13 @@
 '''
-	Non recursive form of Ackermann function,
-	generally performes better because of recusion depth
-	try to implement numba decorator
+	Optimized version of stack
+
+    cannot njit because of deque object
+
 '''
-import sys
+import sys, time
 from collections import deque
 
-loops = 0
-
-def acker(m,n):
-    right = [m]
-    result = n
-    i = 0
-
-    while True:
-        #print(right)
-        #global loops
-        #loops += 1
-        if len(right) == 0:
-            break
-
-        if right[i] > 0 and result > 0:
-            right.append(right[i])
-            right[i] -= 1
-            result -= 1
-            i += 1
-
-        elif right[i] > 0 and result == 0:
-            right[i] -= 1
-            result = 1
-
-        elif right[i] == 0:
-            result += 1
-            right.pop()
-            i -=1
-
-    return result
-
-def ack_ix(m, n):
+def ackv2(m, n):
     "Paddy3118's iterative with optimisations on m"
 
     stack = deque([])
@@ -61,4 +31,9 @@ def ack_ix(m, n):
 
     return stack[0]
 
-print(acker(int(sys.argv[1]), int(sys.argv[2])))
+if __name__ == "__main__":
+    sys.set_int_max_str_digits(1000000)
+
+    start = time.perf_counter()
+    print(ackv2(int(sys.argv[1]), int(sys.argv[2])))
+    print('%f seconds' %(time.perf_counter()-start))

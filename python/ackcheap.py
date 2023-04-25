@@ -10,10 +10,6 @@
 import sys
 import time
 from sys import platform
-from hyperop import hyperop
-
-def exp(base, ex, n):
-	return base**ex**n
 
 def ackcheap(m, n):
 	if m == 0:
@@ -32,14 +28,10 @@ def ackcheap(m, n):
 		if n == 1:
 			# not possible
 			return (2**2**2**2**65536) - 3
-	elif m == 6:
-		H4 = hyperop(4)
-		return H4(2,5)
 
 if __name__ == "__main__":
-	if platform == "win32":
-		# 20,000 digits
-		sys.set_int_max_str_digits(56000000)
+	# 20,000 digits
+	#sys.set_int_max_str_digits(56000000)
 
 	m = int(sys.argv[1])
 	n = int(sys.argv[2])

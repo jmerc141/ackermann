@@ -1,6 +1,11 @@
-# Python program to illustrate Ackermann function
-# uses list to hold previouly calculated values
-# takes less time
+'''
+	Python program to illustrate Ackermann function
+	uses list to hold previouly calculated values
+	takes less time
+
+	jit does not work with dict types easily
+'''
+
 import sys, time
 
 count = 0
@@ -10,8 +15,8 @@ n = int(sys.argv[2])
 memo = {}
 
 def ackmem(m, n):
-	global count
-	count += 1
+	#global count
+	#count += 1
 
 	if not (m, n) in memo:
 		if m == 0:
@@ -39,4 +44,3 @@ if __name__ == '__main__':
 
 	print("Calls:", count)
 	print(time.perf_counter() - start)
-	#print(memo)
