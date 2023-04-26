@@ -32,7 +32,7 @@ def ackv2(m, n):
     return stack[0]
 
 if __name__ == "__main__":
-    sys.set_int_max_str_digits(1000000)
+    sys.set_int_max_str_digits(10000000)
 
     start = time.perf_counter()
     print(ackv2(int(sys.argv[1]), int(sys.argv[2])))

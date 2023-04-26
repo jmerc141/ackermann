@@ -8,3 +8,6 @@
 # Python
 *.nbc
 *.nbi
+
+# Java
+*.class
