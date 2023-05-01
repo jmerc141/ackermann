@@ -11,6 +11,7 @@ Different implementations of the ackermann function in C, Python, and Java (32 a
 
 # compile c
   gcc -Wall -g ack.c -o ack.out
+  
   32 bit: add -m32
 
 # java
