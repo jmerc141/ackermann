@@ -1,18 +1,19 @@
 # ackermann
 Different implementations of the ackermann function in C, Python, and Java (32 and 64 bit)
 
-to install 32 bit libraries:
+# to install 32 bit libraries:
 
-sudo dpkg --add-architecture i386
+  sudo dpkg --add-architecture i386
 
-sudo apt update
+  sudo apt update
 
-sudo apt install libgmp3-dev libgmp3-dev:i386 gcc-multilib
+  sudo apt install libgmp3-dev libgmp3-dev:i386 gcc-multilib
 
-compile c: gcc -Wall -g ack.c -o ack.out
+# compile c
+  gcc -Wall -g ack.c -o ack.out
+  32 bit: add -m32
 
-32 bit: add -m32
-
-java: java -Xss1g FILE m n
+# java
+  java -Xss1g FILE m n
 
 uses 1GB of memory
