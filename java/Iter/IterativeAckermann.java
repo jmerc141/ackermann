@@ -2,18 +2,17 @@
  * Source https://stackoverflow.com/a/51092690/5520417
  */
 
-package matematicas;
-
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Stack;
+import java.util.Date;
 
 /**
  * @author rodri
  *
  */
 
-public class IterativeAckermannMemoryOptimization extends Thread {
+class IterativeAckermannMemoryOptimization extends Thread {
 
   /**
    * Max percentage of free memory that the program will use. Default is 10% since
@@ -246,13 +245,13 @@ public class IterativeAckermann extends Thread {
         e.printStackTrace();
       }
     }
-    for ( BigInteger i = BigInteger.ZERO; i.compareTo(LIMIT) == - 1; i = i.add(BigInteger.ONE) ) {
-      for ( BigInteger j = BigInteger.ZERO; j.compareTo(LIMIT) == - 1; j = j.add(BigInteger.ONE) ) {
-        IterativeAckermann iterativeAckermann = new IterativeAckermann(i, j, null, null);
-        System.out.printf("Ackmermann(%d, %d) = %d\n", i, j, iterativeAckermann.iterative_ackermann(i, j));
-
-      }
-    }
+    
+    BigInteger A;
+    long start = new Date().getTime();
+    A = iterative_ackermann(getM(), getN());
+    double t = (new Date().getTime() - start);
+    System.out.println(A);
+    System.out.printf("%.3fs", t / 1000);
   }
 
   /**
@@ -384,6 +383,23 @@ public class IterativeAckermann extends Thread {
   public static void main(String[] args) {
     IterativeAckermannMemoryOptimization iterative_ackermann_memory_optimization = new IterativeAckermannMemoryOptimization(
         new IterativeAckermann());
-    iterative_ackermann_memory_optimization.start();
+
+    if(args.length == 2){
+      BigInteger m, n, A;
+      m = new BigInteger(args[0]);
+      n = new BigInteger(args[1]);
+
+      iterative_ackermann_memory_optimization.getIterativeAckermann()
+        .setM(m);
+      iterative_ackermann_memory_optimization.getIterativeAckermann()
+        .setN(n);
+      iterative_ackermann_memory_optimization.start();
+      
+    }
+    else{
+      System.out.println("enter 2 arguments");
+    }
+
+    
   }
 }

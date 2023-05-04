@@ -1,4 +1,8 @@
-// Java program to illustrate Ackermann function
+/*
+	Java program to illustrate Ackermann function
+	(3, 24)?
+
+*/
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -36,9 +40,9 @@ class GFG
 
 			long start = new Date().getTime();
 			A = ack(m, n);
-			double t = (new Date().getTime() - start) / 1000;
+			double t = (new Date().getTime() - start);
 			System.out.println(A + "\nLoops: " + count);
-			System.out.printf("%.3fs", t);
+			System.out.printf("%.3fs", t / 1000);
 			
 		}
 		else{

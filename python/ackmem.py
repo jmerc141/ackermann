@@ -9,8 +9,6 @@
 import sys, time
 
 count = 0
-m = int(sys.argv[1])
-n = int(sys.argv[2])
 
 memo = {}
 
@@ -26,9 +24,11 @@ def ackmem(m, n):
 		else:
 			result = ackmem(m-1, ackmem(m, n-1))
 		memo[(m ,n)] = result
-	return memo[(m,n)]
+	return memo[(m, n)]
 
 if __name__ == '__main__':
+	m = int(sys.argv[1])
+	n = int(sys.argv[2])
 	# if return value is more than recursionlimit
 	# then a maximum recursion depth error will occur
 	recursionlimit = 5000000
