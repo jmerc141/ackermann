@@ -30,7 +30,3 @@ set t=%errorlevel%
 set /a depth-=1
 if %depth%==0 ( exit %t% ) else ( exit /b %t% )
 
-::Ack.cmd
-@echo off
-cmd/c ackermann.cmd %1 %2
-echo Ackermann(%1, %2)=%errorlevel%
