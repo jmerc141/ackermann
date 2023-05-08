@@ -18,3 +18,7 @@ function stackermann(M, N) {
     }
   }
 }
+
+var args = process.argv.slice(2);
+
+console.log(stackermann(parseInt(args[0]), parseInt(args[1])));
