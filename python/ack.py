@@ -3,9 +3,6 @@
 import sys, time
 from sys import platform
 
-import smtplib
-from email.message import EmailMessage
-
 count = 0
 
 def A(m, n):
@@ -39,12 +36,3 @@ if __name__ == "__main__":
 	except Exception as e:
 		print(e)
 	print(time.perf_counter() - start)
-
-	msg = EmailMessage()
-	msg.set_content(f"({m}, {n}) returned with value: {a}")
-	msg['Subject'] = 'ack.py'
-	msg['From'] = 'james.merc@yahoo.com'
-	msg['To'] = 'james.merc@yahoo.com'
-	s = smtplib.SMTP('localhost')
-	s.send_message(msg)
-	s.quit()

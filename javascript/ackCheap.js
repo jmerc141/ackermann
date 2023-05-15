@@ -10,10 +10,13 @@ function ack(m, n) {
         return 2n**(n + 3n) - 3n;
     case 4:
         return (2n**2n**2n**2n**n) - 3n;
+    case 5:
+        if(n==0){return (2n**2n**2n**2n**1n) - 3n;}
+        if(n==1){return (2n**2n**2n**2n**65536n) - 3n;}
 
     }
 }
 
 var args = process.argv.slice(2);
-//var b = BigInt(ack(parseInt(args[0]), BigInt(args[1])));
+
 console.log(ack(parseInt(args[0]), BigInt(args[1])));
