@@ -20,5 +20,7 @@ function stackermann(M, N) {
 }
 
 var args = process.argv.slice(2);
-
-console.log(stackermann(parseInt(args[0]), parseInt(args[1])));
+var start = Date.now();
+var A = stackermann(parseInt(args[0]), parseInt(args[1]));
+var end = (Date.now() - start) / 1000;
+console.log(A + "\n" + end + "s");

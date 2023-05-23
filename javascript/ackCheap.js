@@ -18,5 +18,7 @@ function ack(m, n) {
 }
 
 var args = process.argv.slice(2);
-
+var start = Date.now();
 console.log(ack(parseInt(args[0]), BigInt(args[1])));
+var end = (Date.now() - start) / 1000;
+console.log("\n" + end + "s");

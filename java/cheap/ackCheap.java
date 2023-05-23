@@ -56,10 +56,10 @@ class Cheap
 			int m = Integer.valueOf(args[0]);
 			n = new BigInteger(args[1]);
 
-			long start = new Date().getTime();
+			double start = new Date().getTime();
 			A = ack(m, n);
 			double t = (new Date().getTime() - start);
-			System.out.println(A);
+			System.out.println(A + " " + start + " " + t);
 			System.out.printf("%.3fs", t / 1000);
 			
 		}
