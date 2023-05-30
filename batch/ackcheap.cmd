@@ -22,11 +22,9 @@ echo %result%
 exit 0
 
 :m2
-:: calculate x^n
-SET x=2
 SET n=%2
 set result=1
-FOR /L %%i IN (1,1,%n%) DO SET /A result*=x
+set /a result="2 * %n%"
 set /a result+=3
 ECHO %result%
 exit 0

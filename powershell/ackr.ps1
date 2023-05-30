@@ -1,4 +1,4 @@
-function Get-Ackermann ([int64]$m, [int64]$n)
+function Get-Ackermann ([int64]$m, [bigint]$n)
 {
     if ($m -eq 0)
     {
