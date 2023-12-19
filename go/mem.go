@@ -1,3 +1,7 @@
+/*
+big doesn't work because of pointers
+*/
+
 package main
 import (
 	"fmt"
@@ -5,32 +9,11 @@ import (
 	"math/big"
 	"strconv"
 	"runtime/debug"
+	"time"
 )
 
 var A = map[string]uint64{}
-var one = big.NewInt(1)
 
-/*
-func ackmb(m uint64, n big.Int) big.Int {
-	sm := strconv.FormatUint(m, 10)
-	if _, ok := A[sm + " " + n.String()]; ok {
-		
-	} else {
-		if m==0{
-			//newn := n.Add(&n, big.NewInt(1))
-			A[sm + " " + n.String()] = *n.Add(&n, big.NewInt(1))
-		} else if n.Cmp(big.NewInt(0))==0 {
-			A[sm + " " + n.String()] = ackm(m-1, *one)
-		} else {
-			//newn := n.Sub(n, big.NewInt(1))
-			A[sm + " " + n.String()] = ackm(m-1, ackm(m, *n.Sub(&n, big.NewInt(1))))
-		}
-	}
-	
-	fmt.Println(A[sm + " " + n.String()])
-	return A[sm + " " + n.String()]
-}
-*/
 
 func ackm(m uint64, n uint64) uint64 {
 	sm := strconv.FormatUint(m, 10)
@@ -49,9 +32,9 @@ func ackm(m uint64, n uint64) uint64 {
 		}
 	}
 	
-	//fmt.Println(A[sm + " " + sn])
 	return A[sm + " " + sn]
 }
+
 
 func main() {
 	debug.SetMaxStack(3000000000)
@@ -69,9 +52,10 @@ func main() {
 			panic(ok)
 		}
 
+		start := time.Now()
 		a := ackm(m.Uint64(), n.Uint64())
-		
-		fmt.Println(a)
+		end := time.Since(start)
+		fmt.Println(a, "\n", end)
 	} else {
 		fmt.Println("Needs 3 arguments")
 	}
