@@ -8,6 +8,9 @@
 # Python
 *.nbc
 *.nbi
+*.spec
+build
+dist
 
 # Java
 *.class
