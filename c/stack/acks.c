@@ -2,7 +2,7 @@
 	using a stack struct
 	edit stack.h MAX size for more memory
 	for linux, apt install libgmp3-dev or some gmp library
- 	gcc -Wall -g -lgmp acks.c -o {file}
+ 	gcc -Wall -g acks.c -o {file} -lgmp
 */
 
 #include <stdio.h>
