@@ -1,7 +1,7 @@
 /* C program that repcates Ackermann function
 	using a stack struct
 	edit stack.h MAX size for more memory
-	
+	for linux, apt install libgmp3-dev or some gmp library
 */
 
 #include <stdio.h>
