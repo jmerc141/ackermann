@@ -1,13 +1,7 @@
 ; Cheap ackermann implementation
-; largest llu: 18446744073709551615
-; 3,60 =       9223372036854775805
-; 3,61 =       18446744073709551613
-; 3,62 =       36893488147419103229
-;			   27670116110564327440
 
 global  _start
 extern  printf
-
 
 section .data
 	msg  db "Ackermann(%d, %llu) = %llu", 10, 0 
@@ -33,13 +27,13 @@ _start:
 	mov rdx, [m]
 	mov r8, [n]
 	mov r9, rax
-    sub rsp, 32
-    call printf
-    add rsp, 32
+	sub rsp, 32
+	call printf
+	add rsp, 32
 
-    xor rdi, rdi
+	xor rdi, rdi
 
-    ret
+	ret
 
 ackermann:
 	;Base case if m==0, return n+1
@@ -70,7 +64,7 @@ ackermann:
 
 .one:
 	add rsi, 2		; n=n+2
-	mov rax, rsi	; return n
+	mov rax, rsi		; return n
 	ret
 
 .two:
@@ -83,7 +77,7 @@ ackermann:
 	mov rax, 2		; rax=2
 	mov rbx, 2		; rbx=2
 	add rsi, 2		; n = n + 3 not sure why 2
-	mov rcx, rsi	; tmp = n
+	mov rcx, rsi		; tmp = n
 	call .exp		; 2^n
 	sub rax, 3		; rax - 3
 	ret
@@ -137,8 +131,6 @@ ackermann:
 
 .five:
 	ret
-
-.exp2:
 
 .exp:
 	mul rbx
