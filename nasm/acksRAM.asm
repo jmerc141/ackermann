@@ -2,7 +2,7 @@
 ; This version hold numbers in RAM
 ; Change size of stack for larger numbers
 ; qwords used because of 64bit registers
-;		mov byte[stack], rdi fails 8bit <- 64bit
+;	mov byte[stack], rdi fails 8bit <- 64bit
 
 global  _start
 extern  printf
@@ -36,54 +36,53 @@ _start:
     ret
 
 ackermann:
-	add rcx, 8					;increment stack counter
+	add rcx, 8			;increment stack counter
 	mov qword[stack + rcx], rdi	;push m onto stack
-    jmp .l1
+	jmp .l1
 	ret
 
 .l1:
 	cmp rcx, 0			;if stack is empty
-    je .stop            ;stop
+	je .stop            		;stop
 
-    cmp qword[stack + rcx], 0
-    jg .cmpres          ;if top of stack > 0, compare result
-    je .three           ;if top of stack = 0, got to .three
+	cmp qword[stack + rcx], 0
+	jg .cmpres          		;if top of stack > 0, compare result
+	je .three           		;if top of stack = 0, got to .three
 
-    ret
+	ret
 
 .cmpres:
-    cmp rax, 0
-    jg .one             ;if result > 0, go to .one
-    je .two             ;if result = 0, go to .two
-    ret
-
+	cmp rax, 0
+	jg .one             ;if result > 0, go to .one
+	je .two             ;if result = 0, go to .two
+	ret
 
 .one:
 	mov rsi, qword[stack + rcx]		;move top of stack to temp register
 	mov qword[stack + rcx + 8], rsi	;push temp to top of stack
-    dec qword[stack + rcx]    		;decrement stack[top-1]
+	dec qword[stack + rcx]    		;decrement stack[top-1]
 	add rcx, 8						;increment stack counter
-    dec rax             			;decrement result
-    jmp .l1
+	dec rax             			;decrement result
+	jmp .l1
 
 .two:
-    dec qword[stack + rcx]      	;decrement top of stack
-    mov rax, 1          			;result = 1
-    jmp .l1
+	dec qword[stack + rcx]      	;decrement top of stack
+	mov rax, 1          			;result = 1
+	jmp .l1
 
 .three:
-    inc rax         				;result++
+	inc rax         				;result++
 	sub rcx, 8						;decrement stack counter
-    jmp .l1
+	jmp .l1
 
 
 .stop:
-    mov rcx, msg
+	mov rcx, msg
 	mov rdx, [m]
 	mov r8, [n]
 	mov r9, rax
-    sub rsp, 32
-    call printf
-    add rsp, 32
-    ret
+	sub rsp, 32
+	call printf
+	add rsp, 32
+	ret
 
