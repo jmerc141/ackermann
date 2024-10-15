@@ -17,4 +17,8 @@ Different implementations of the ackermann function in C, Python, and Java (32 a
 # java
   java -Xss1g FILE m n
 
-uses 1GB of memory
+  uses 1GB of memory
+
+# nasm
+nasm -f win64 *.asm
+golink /console /console {/stackinit 900000h} {/stacksize 900000h} *.obj /entry _start msvcr100.dll
