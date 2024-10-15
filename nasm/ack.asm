@@ -1,7 +1,6 @@
 ; Ackermann function (recursive)
 ; nasm -f win64 ack.asm
 ; golink /console ask.obj /entry _start msvcr100.dll
-; largest llu: 18446744073709551615
 
 global  _start
 extern  printf
@@ -30,19 +29,19 @@ _start:
 	mov rdx, [m]
 	mov r8, [n]
 	mov r9, rax
-    sub rsp, 32
-    call printf
-    add rsp, 32
+	sub rsp, 32
+	call printf
+	add rsp, 32
 
-    xor rdi, rdi
+	xor rdi, rdi
 
-    ret
+	ret
 
 ackermann:
 	;Base case if m==0, return n+1
 	cmp rdi, 0
 	je .case_one
-    jne .check_second
+	jne .check_second
 	ret
 
 .case_one:
@@ -53,15 +52,15 @@ ackermann:
 .check_second:
 	;if n==0 call ackermann(m-1,1)
 	cmp rsi, 0
-    je .case2
+	je .case2
 	jne .case3
 	ret
 
 .case2:
-    dec rdi							;m=m-1
-    mov rsi, 1						;n=1
-    call ackermann
-    ret
+	dec rdi							;m=m-1
+	mov rsi, 1						;n=1
+	call ackermann
+	ret
 
 .case3:
 	;Call ackermann(m,n-1)
