@@ -2,6 +2,7 @@
 ; This version uses the program stack to hold numbers
 ; Change stackinit or stacksize for larger numbers
 ; golink /console /stackinit 900000h /stacksize 900000h ask.obj /entry _start msvcr100.dll
+; F4240h = 1GB
 
 
 global  _start
