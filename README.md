@@ -20,6 +20,13 @@ Different implementations of the ackermann function in C, Python, and Java (32 a
   uses 1GB of memory
 
 # nasm
-nasm -f win64 *.asm
-F4240h = 1GB
-golink /console /console {/stackinit 900000h} {/stacksize 900000h} *.obj /entry _start msvcr100.dll
+  Download:
+  https://www.nasm.us/pub/nasm/releasebuilds/2.16.03/win64/nasm-2.16.03-win64.zip
+  http://www.godevtool.com/Golink.zip
+
+  nasm -f win64 *.asm
+
+  golink /console /console *.obj /entry _start msvcr100.dll
+
+  some implementations require /stackinit xxxxh or /stacksize xxxxh
+  
