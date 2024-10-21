@@ -2,23 +2,40 @@
 ; nasm -f win64 ack.asm
 ; golink /console ask.obj /entry _start msvcr100.dll
 
-global  _start
-extern  printf
-
+global _start
+extern printf
+extern scanf
 
 section .data
-	msg  db "Ackermann(%d, %llu) = %llu", 10, 0 
-	m    dq 4
-	n    dq 1
+	inp db "Enter m n: ", 0
+	fmt db "%d %llu", 0
+	msg db "Ackermann(%d, %llu) = %llu", 10, 0 
 
 
 section .bss
 	result resq 1
+	m   resq 1
+	n   resq 1
 
 
 section .text
 ;Basically cannot get command line parameters on Windows 64 bit
 _start:
+
+	;printf
+	mov rcx, inp
+	sub rsp, 32
+	call printf
+	add rsp, 32
+
+	; scanf
+	mov rcx, fmt
+	mov rdx, m
+	mov r8, n
+	sub rsp, 32
+	call scanf
+	add rsp, 32
+
 	mov rdi, [m]
 	mov rsi, [n]
 

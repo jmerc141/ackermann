@@ -4,32 +4,47 @@
 ; qwords used because of 64bit registers
 ;	mov byte[stack], rdi fails 8bit <- 64bit
 
-global  _start
-extern  printf
+global _start
+extern printf
+extern scanf
 
 section .data
-	msg  db "Ackermann(%d, %llu) = %llu", 10, 0
-	m    dq 3
-	n    dq 20
+	inp db "Enter m n: ", 0
+	fmt db "%d %llu", 0
+	msg db "Ackermann(%d, %llu) = %llu", 10, 0
 
 
 section .bss
 	;number of elements on stack
-	stack resq 12500000		;1GB
+	stack resq 125000000		;1GB
+	m resq 1
+	n resq 1
     
-
 
 section .text
 ;Basically cannot get command line parameters on Windows 64 bit
 _start:
+
+	;printf
+	mov rcx, inp
+	sub rsp, 32
+	call printf
+	add rsp, 32
+
+	; scanf
+	mov rcx, fmt
+	mov rdx, m
+	mov r8,  n
+	sub rsp, 32
+	call scanf
+	add rsp, 32
+
 	mov rdi, [m]
 	mov rax, [n]
 	
 	mov rcx, 0
-	
 
 	call ackermann
-
 
     xor rdi, rdi
 
