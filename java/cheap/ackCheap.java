@@ -19,7 +19,7 @@ class Cheap
 		case 0:
 			return n.add(BigInteger.ONE);
 		case 1:
-			return n.add(BigInteger.TWO);
+			return n.add(BigInteger.valueOf(2));
 		case 2:
 			n = base.pow(n.intValue());
 			return n.add(BigInteger.valueOf(3));
