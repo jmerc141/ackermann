@@ -23,4 +23,4 @@ Different implementations of the ackermann function in C, Python, and Java (32 a
 nasm -f win64 *.asm
 F4240h = 1GB
 
-golink /console /console {/stackinit 900000h} {/stacksize 900000h} *.obj /entry _start msvcr100.dll
+golink /console {/stackinit 900000h} {/stacksize 900000h} *.obj /entry _start msvcr100.dll
