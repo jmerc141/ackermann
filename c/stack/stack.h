@@ -11,7 +11,7 @@
   214,748,364
   Stack could be 1.7 GigaBytes
 */
-#define MAX (ULONG_MAX / 20)
+#define MAX (ULONG_MAX / 20000000000)
 
 unsigned long long int count = 0;
 
@@ -69,7 +69,7 @@ void pop(st *s) {
 void printStack(st *s) {
   printf("Stack: ");
   for (int i = 0; i < count; i++) {
-    printf("%d ", s->items[i]);
+    printf("%llu ", s->items[i]);
   }
   printf("\n");
 }

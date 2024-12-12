@@ -38,9 +38,4 @@ if __name__ == "__main__":
 
 	start = time.perf_counter()
 	a = ackcheap(m, n)
-	nd = time.perf_counter()
-	
-	#print(a, '\n')
-	print(nd-start)
-	
-
+	print(a, '\n', time.perf_counter() - start)

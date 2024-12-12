@@ -3,12 +3,13 @@
 	edit stack.h MAX size for more memory
 	for linux, apt install libgmp3-dev or some gmp library
  	gcc -Wall -g acks.c -o {file} -lgmp
+  	uncomment calls++ to see number of calls
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <gmp.h>
-#include <stack.h>
+#include "stack.h"
 
 unsigned int calls = 0;
 
@@ -19,7 +20,7 @@ void acknr(unsigned long long int m, mpz_t n){
     int i = 0;
 
     while(1){
-    	calls++;
+    	//calls++;
     	if (count == 0){
     		break;
     	}
@@ -56,7 +57,7 @@ int main(int argc, char *argv[]){
 		mpz_set_str(resn,argv[2],10);
 
 		acknr(mpz_get_ui(resm),resn);
-		gmp_printf("Value: %Zu\nLoops: %u", resn, calls);
+		gmp_printf("Value: %Zu\nLoops: %u\n", resn, calls);
 		
 		mpz_clear(resn);
 		mpz_clear(resm);
