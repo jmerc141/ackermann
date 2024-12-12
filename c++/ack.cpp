@@ -11,7 +11,7 @@ mpz_class ackermann(mpz_class i, mpz_class n);
 
 
 int main(int argc, char *argv[]) {
-    std::cout << ackermann(atoi(argv[1]), mpz_class(argv[2])).get_str(10);
+    std::cout << ackermann(atoi(argv[1]), mpz_class(argv[2])).get_str(10) + "\n";
 }
 
 

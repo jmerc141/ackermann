@@ -37,7 +37,8 @@ int main(int argc, char *argv[])
         unsigned long long int m, n;
 
         m_bits = 3;
-        n_bits = 20;  /* can save n values up to 2**20 - 1, that's 1 meg */
+        n_bits = 27;  /* can save n values up to 2**20 - 1, that's 1 meg */
+        // 8 * 1 << 30
         cache = malloc(sizeof(unsigned long long int) * (1 << (m_bits + n_bits)));
         memset(cache, 0, sizeof(unsigned long long int) * (1 << (m_bits + n_bits)));
 
@@ -49,6 +50,8 @@ int main(int argc, char *argv[])
         unsigned long long int A;
         A = ackermann(m, n);
         printf("Value: %llu\nCalls: %u\n", A, count);
+
+        free(cache);
 
         return 0;
 }

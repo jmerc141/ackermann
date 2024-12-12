@@ -3,11 +3,13 @@ import (
 	"fmt"
 	"os"
 	"math/big"
+	"time"
 )
 
 func ackr(m big.Int, n big.Int) big.Int {
 	two := big.NewInt(2)
 	z := big.NewInt(0)
+	three := big.NewInt(3)
 	if m.Cmp(z)==0 {
 		n.Add(&n, big.NewInt(1))
 		return n
@@ -17,7 +19,8 @@ func ackr(m big.Int, n big.Int) big.Int {
 		return n
 	}
 	if m.Cmp(big.NewInt(2))==0 {
-		n.Exp(two, &n, z)
+		n.Mul(&n, two)
+		n.Add(&n, three)
 		return n
 	}
 	if m.Cmp(big.NewInt(3))==0 {
@@ -57,9 +60,11 @@ func main() {
 			panic(ok)
 		}
 
+		st := time.Now()
 		a := ackr(*m, *n)
+		elaps := time.Since(st)
 
-		fmt.Println(a.String())
+		fmt.Println(a.String(), "\n", elaps)
 	} else {
 		fmt.Println("Need 2 arguments")
 	}

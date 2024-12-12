@@ -67,7 +67,7 @@ def half():
 if __name__ == '__main__':
 	# if return value is more than recursionlimit
 	# then a maximum recursion depth error will occur
-	recursionlimit = 500000
+	recursionlimit = 500000000
 	sys.setrecursionlimit(recursionlimit)
 
 	# number of digits that n can be

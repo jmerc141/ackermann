@@ -19,8 +19,8 @@ def A(m, n):
 if __name__ == "__main__":
 	if platform == "win32":
 		# 20,000 digits
-		#sys.set_int_max_str_digits(20000)
-		pass
+		sys.set_int_max_str_digits(200000)
+		
 
 	# if return value is more than recursionlimit
 	# then a maximum recursion depth error will occur
@@ -32,7 +32,7 @@ if __name__ == "__main__":
 	start = time.perf_counter()
 	try:
 		a = A(m, n)
-		print("Value:", a)
+		print(a)
 	except Exception as e:
 		print(e)
-	print(time.perf_counter() - start)
+	#print(time.perf_counter() - start)

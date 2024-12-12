@@ -31,12 +31,16 @@ def ackcheap(m, n):
 
 if __name__ == "__main__":
 	# 20,000 digits
-	#sys.set_int_max_str_digits(56000000)
+	sys.set_int_max_str_digits(56000000)
 
 	m = int(sys.argv[1])
 	n = int(sys.argv[2])
 
 	start = time.perf_counter()
-	print(ackcheap(m, n), '\n')
-	print(time.perf_counter() - start)
+	a = ackcheap(m, n)
+	nd = time.perf_counter()
+	
+	#print(a, '\n')
+	print(nd-start)
+	
 
