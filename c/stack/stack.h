@@ -10,8 +10,10 @@
   268,435,455 will give array too large error
   214,748,364
   Stack could be 1.7 GigaBytes
+  Decrease 20000000000 to increase stack size
 */
 #define MAX (ULONG_MAX / 20000000000)
+
 
 unsigned long long int count = 0;
 

@@ -64,6 +64,7 @@ int main(int argc, char *argv[]){
 	}
 	else{
 		printf("Enter 2 arguments\n");
+		printf("%llu\n", MAX);
 	}
 
 	return 0;
