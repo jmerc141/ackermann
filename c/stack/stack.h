@@ -5,14 +5,15 @@
 #include <limits.h>
 
 // limited to int max
-/* 222164505 is the max stack size before something
+/* 
+  222164505 is the max stack size before something
   goes wrong, idk what
   268,435,455 will give array too large error
-  214,748,364
-  Stack could be 1.7 GigaBytes
+  Stack could be 1.7 GigaBytes (222164505 * 8)
   Decrease 20000000000 to increase stack size
+  ULONG_MAX = 4294967295
 */
-#define MAX (ULONG_MAX / 20000000000)
+#define MAX (ULONG_MAX / 20) // = 214,748,364
 
 
 unsigned long long int count = 0;
