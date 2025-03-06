@@ -4,7 +4,9 @@ Different implementations of the ackermann function in C, Python, and Java (32 a
 # compile c
 
   recursive:
+  
     windows: x86_64-w64-mingw32-gcc -Wl,--stack,4194304 -g file.c -o file
+    
     linux: gcc -g ackr.c -o rec
   
   mem (n_bits=27):
