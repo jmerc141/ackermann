@@ -1,16 +1,13 @@
 ; Ackermann function (stack array)
-; This version hold numbers in RAM
+; This version hold numbers in RAM (array is in .bss)
 ; Change size of stack for larger numbers
-; qwords used because of 64bit registers
-;	mov byte[stack], rdi fails 8bit <- 64bit
 
-global _start
+default rel
+global main
 extern printf
-extern scanf
 
 section .data
-	inp db "Enter m n: ", 0
-	fmt db "%d %llu", 0
+	error_msg db "Please run again with 2 parameters", 10, 0
 	msg db "Ackermann(%d, %llu) = %llu", 10, 0
 
 
@@ -22,22 +19,28 @@ section .bss
     
 
 section .text
-;Basically cannot get command line parameters on Windows 64 bit
-_start:
+main:
 
-	;printf
-	mov rcx, inp
-	sub rsp, 32
-	call printf
-	add rsp, 32
+	; check for 3 arguments
+	cmp rcx, 3
+	jne errmsg
 
-	; scanf
-	mov rcx, fmt
-	mov rdx, m
-	mov r8,  n
-	sub rsp, 32
-	call scanf
-	add rsp, 32
+	; get first argument
+	mov rdi, [rdx+8]
+	mov [m], rdi
+	; get second argument
+	mov rdi, [rdx+16]
+	mov [n], rdi
+
+	; convert arg1 to integer
+	mov rsi, [m]
+	call .strtoull_custom
+	mov [m], rax
+
+	; convert arg2 to integer
+	mov rsi, [n]
+	call .strtoull_custom
+	mov [n], rax
 
 	mov rdi, [m]
 	mov rax, [n]
@@ -50,9 +53,35 @@ _start:
 
     ret
 
+
+.strtoull_custom:							; rsi = string
+    xor rax, rax     ; Clear rax (result)
+    xor rcx, rcx     ; Clear rcx (digit)
+
+.convert_loop:
+    movzx rcx, byte [rsi]  ; Load the next byte from the string
+    test rcx, rcx          ; Check if it is the null terminator
+    jz .conversion_done    ; If null terminator, conversion is done
+    
+    sub rcx, '0'           ; Convert ASCII to integer
+    cmp rcx, 9
+    ja .conversion_done    ; If not a valid digit, conversion is done
+    
+    imul rax, rax, 10      ; Multiply result by 10
+    add rax, rcx           ; Add the digit to the result
+    
+    inc rsi                ; Move to the next character
+    jmp .convert_loop      ; Repeat the loop
+
+.conversion_done:
+    ;mov [res], rax      ; Store the result
+    ret
+
+
 ackermann:
 	add rcx, 8			;increment stack counter
-	mov qword[stack + rcx], rdi	;push m onto stack
+	mov rdx, stack
+	mov [rdx + rcx], rdi	;push m onto stack
 	jmp .l1
 	ret
 
@@ -60,7 +89,7 @@ ackermann:
 	cmp rcx, 0			;if stack is empty
 	je .stop            		;stop
 
-	cmp qword[stack + rcx], 0
+	cmp qword[rdx + rcx], 0
 	jg .cmpres          		;if top of stack > 0, compare result
 	je .three           		;if top of stack = 0, got to .three
 
@@ -73,15 +102,15 @@ ackermann:
 	ret
 
 .one:
-	mov rsi, qword[stack + rcx]		;move top of stack to temp register
-	mov qword[stack + rcx + 8], rsi	;push temp to top of stack
-	dec qword[stack + rcx]    		;decrement stack[top-1]
+	mov rsi, qword[rdx + rcx]		;move top of stack to temp register
+	mov qword[rdx + rcx + 8], rsi	;push temp to top of stack
+	dec qword[rdx + rcx]    		;decrement stack[top-1]
 	add rcx, 8						;increment stack counter
 	dec rax             			;decrement result
 	jmp .l1
 
 .two:
-	dec qword[stack + rcx]      	;decrement top of stack
+	dec qword[rdx + rcx]      	;decrement top of stack
 	mov rax, 1          			;result = 1
 	jmp .l1
 
@@ -101,3 +130,14 @@ ackermann:
 	add rsp, 32
 	ret
 
+
+errmsg:
+	;printf(rcx, rdx, r8, r9)
+	mov rcx, error_msg
+	
+	sub rsp, 32
+	call printf
+	add rsp, 32
+
+	xor rdi, rdi
+	ret

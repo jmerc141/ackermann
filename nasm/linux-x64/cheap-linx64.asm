@@ -1,37 +1,39 @@
 ; Cheap ackermann implementation, linux64
 
-global _start
+global main
 extern printf
-extern scanf
 
 section .data
-	inp db "Enter m n: ", 0
-	fmt db "%d %llu", 0
+	error_msg db "Please run again with 2 parameters", 10, 0
 	msg db "Ackermann(%d, %llu) = %llu", 10, 0 
 
 section .bss
-	result resq 1
 	m resq 1
 	n resq 1
 
 
 section .text
-_start:
-	;printf
-	push rbp
-	lea rdi, [inp]
-	call printf wrt ..plt
-	mov rax, 0
-	pop rbp
+main:
+	; check for 3 arguments
+	cmp rbp, 3
+	jne errmsg
 
-	;scanf
-	sub rsp, 8
-	lea rdi, [fmt]
-	lea rsi, [m]
-	lea rdx, [n]
-	mov al, 0
-	call scanf wrt ..plt
-	add rsp, 8
+	; get first argument
+	mov rdi, [rsi+8]
+	mov [m], rdi
+	; get second argument
+	mov rdi, [rsi+16]
+	mov [n], rdi
+
+	; convert arg1 to integer
+	mov rsi, [m]
+	call .strtoull_custom
+	mov [m], rax
+
+	; convert arg2 to integer
+	mov rsi, [n]
+	call .strtoull_custom
+	mov [n], rax
 
 	mov rdi, [m]
 	mov rsi, [n]
@@ -52,10 +54,35 @@ _start:
 	mov rax, 0
 	pop rbp
 
-    mov       rax, 60                 ; system call for exit
-    xor       rdi, rdi                ; exit code 0
-    ;syscall                           ; invoke operating system to exit
 	ret
+    ;mov       rax, 60                 ; system call for exit
+    ;xor       rdi, rdi                ; exit code 0
+    ;syscall                           ; invoke operating system to exit
+	
+
+.strtoull_custom:							; rsi = string
+    xor rax, rax     ; Clear rax (result)
+    xor rcx, rcx     ; Clear rcx (digit)
+
+.convert_loop:
+    movzx rcx, byte [rsi]  ; Load the next byte from the string
+    test rcx, rcx          ; Check if it is the null terminator
+    jz .conversion_done    ; If null terminator, conversion is done
+    
+    sub rcx, '0'           ; Convert ASCII to integer
+    cmp rcx, 9
+    ja .conversion_done    ; If not a valid digit, conversion is done
+    
+    imul rax, rax, 10      ; Multiply result by 10
+    add rax, rcx           ; Add the digit to the result
+    
+    inc rsi                ; Move to the next character
+    jmp .convert_loop      ; Repeat the loop
+
+.conversion_done:
+    ;mov [res], rax      ; Store the result
+    ret
+
 
 ackermann:
 	;Base case if m==0, return n+1
@@ -157,4 +184,16 @@ ackermann:
 .exp:
 	mul rbx
 	loop .exp
+	ret
+
+
+errmsg:
+	;printf(rcx, rdx, r8, r9)
+	mov rdi, error_msg
+	
+	sub rsp, 32
+	call printf
+	add rsp, 32
+
+	xor rdi, rdi
 	ret
