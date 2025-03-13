@@ -35,6 +35,7 @@ Different implementations of the ackermann function in C, Python, and Java (32 a
   recursive:
   
     windows: x86_64-w64-mingw32-g++ -Wl,--stack,4194304 ackr.cpp -o rec -std=c++14 -O2
+    
     linux: g++ -g ackr.cpp -o rec -std=c++14 -O2
 
   goal:
@@ -81,11 +82,11 @@ Different implementations of the ackermann function in C, Python, and Java (32 a
 
   ## windows
   
-    nasm -f win64 *.asm
-    golink /console {/stackinit 900000h} {/stacksize 900000h} *.obj /entry _start msvcr100.dll
+    nasm -f win64 FILE.asm
+    x86_64-w64-mingw32-gcc -Wl,--stack,9437184 -o FILE FILE.o
     
 ## linux
 
-    nasm -f elf64 *.asm
-    gcc -no-pie *.o -o *
+    nasm -f elf64 FILE.asm
+    gcc -no-pie -Wl,-z,stack-size=9437184 FILE.o -o FILE
   
